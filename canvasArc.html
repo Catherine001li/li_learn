@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>arc圆形</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+<script>
+    // 实现一个圆角的矩形
+    var canvas = document.getElementById('myCanvas'),
+        ctx = canvas.getContext('2d');
+        ctx.save();
+        ctx.arc(10,10,10,Math.PI,1.5*Math.PI);
+        ctx.lineTo(100,0);
+        ctx.arc(100,10,10,1.5*Math.PI,0);
+        ctx.lineTo(110,110);
+        ctx.arc(100,110,10,0,0.5*Math.PI);
+        ctx.lineTo(10,120);
+        ctx.arc(10,110,10,0.5*Math.PI,1.0*Math.PI);
+        // ctx.lineTo(0,10);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.save();
+        //arcTo;x1,y1,x2,y2,r，控制点，终止点，半径
+        ctx.beginPath();
+        ctx.moveTo(200,200);
+        ctx.lineTo(400,200);
+        ctx.lineTo(400,400);
+        ctx.lineWidth=1;
+        ctx.strokeStyle='grey';
+        ctx.stroke();
+        ctx.restore();
+        
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(200,200);
+        ctx.lineWidth=5;
+        ctx.strokeStyle='red';
+        ctx.arcTo(400,200,400,400,100);
+        ctx.stroke();
+        ctx.restore();
+
+
+        // 贝塞尔曲线
+        // 二次贝塞尔曲线quadraticCurveTo(x1,y1,x2,y2)控制点，终点
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(200,200);
+        ctx.lineWidth=5;
+        ctx.strokeStyle='green';
+        ctx.quadraticCurveTo(400,200,400,400,100);
+        ctx.stroke();
+        ctx.restore();
+
+        // 三次贝塞尔曲线bezierCurveTo(x1,y1,x2,y2,x3,y3)控制点，控制点终点
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(200,200);
+        ctx.lineWidth=5;
+        ctx.strokeStyle='blue';
+        ctx.bezierCurveTo(400,200,300,300,400,400,100);
+        ctx.stroke();
+        ctx.restore();
+
+        // 文字
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.font="bold 40px Arial"; //font-style font-variant(normal,small-caps) font-weight font-size font-family
+        ctx.fillStyle='blue';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";//top,middle,bottom,alphabetic（拉丁文）,ideographic（中文日文）,hanging(印度文)
+        ctx.moveTo(0,300);
+        ctx.lineTo(800,300)
+        ctx.stroke();
+        ctx.fillText("你好啊",400,300,100);//最后一个参数是允许的最大的宽度
+        ctx.strokeText("你好啊",400,400);
+        // 阴影
+        ctx.shadowColor="red";
+        ctx.shadowOffsetX=5;
+        ctx.shadowOffsetY=5;
+        ctx.shadowBlur=5;
+        var textWidth = ctx.measureText('欢迎你').width;
+        ctx.fillText(textWidth+'px',400,500);
+        ctx.restore();
+    
+        // 透明度
+        ctx.save();
+        ctx.beginPath();
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle= "green";
+        ctx.arc(120,10,10,0*Math.PI,2*Math.PI);
+        ctx.arc(150,10,10,0*Math.PI,2*Math.PI);
+        ctx.fill();
+        ctx.restore();
+
+</script>
+</body>
+</html>

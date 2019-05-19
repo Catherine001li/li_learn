@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas图片变换和状态保存</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('myCanvas'),
+        ctx = canvas.getContext('2d');
+
+        // 保存当前的装固态
+        ctx.save();
+        // 图像的平移
+        ctx.fillStyle="red";
+        ctx.translate(100,100)
+        ctx.fillRect(0,0,200,200);   
+        ctx.restore();
+
+         ctx.fillStyle="green";
+         ctx.translate(200,200);
+         ctx.fillRect(0,0,200,200);
+        
+        // translate,rotate,scale
+        // ctx.save();
+        // ctx.scale(1,1);
+        // ctx.fillStyle="yellow";
+        // ctx.lineWidth=2;
+        // ctx.fillRect(200,200,200,200);
+        // ctx.strokeRect(200,200,200,200); 
+        // ctx.restore();
+
+        // ctx.save();
+        // ctx.scale(2,2);
+        // ctx.fillStyle="green";
+        // ctx.fillRect(200,200,200,200);
+        // ctx.strokeRect(200,200,200,200); 
+        // ctx.restore();
+        
+        // 使用变换矩阵
+        // a c e 
+        // b d f
+        // 0 0 1
+        // ad 水平垂直缩放
+        // bc 水平垂直倾斜
+        // ef水平垂直位移
+
+        ctx.save();
+        ctx.fillStyle="green";
+        ctx.transform(1.5,0.1,0.2,1.5,0,0);
+        // 重置并创建的变换矩阵
+        ctx.setTransform(1.5,-0.1,-0.2,1.5,0,0);
+        ctx.fillRect(200,200,200,200);
+        ctx.strokeRect(200,200,200,200); 
+        ctx.restore();
+
+
+
+
+        
+    }
+</script>
+</body>
+</html>

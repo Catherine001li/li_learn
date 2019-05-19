@@ -1,0 +1,49 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>canvas的渐变</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="1000" height="1000">
+            <p>你的浏览器不支持Canvas</p>
+        </canvas>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById('myCanvas'),
+            ctx = canvas.getContext('2d');
+
+            var linearGrad = ctx.createLinearGradient(0,0,500,500);// 线性渐变，起点坐标和终点坐标
+            linearGrad.addColorStop(0.0, '#fff');
+            linearGrad.addColorStop(0.5, '#00ff00');
+            linearGrad.addColorStop(1.0, '#000');
+            ctx.fillStyle = linearGrad;
+            ctx.fillRect(0,0,500,500);
+
+            // 径向渐变
+            var radialGrad = ctx.createRadialGradient(650,650,0,650,650,150);// 线性渐变，起点坐标和终点坐标
+            radialGrad.addColorStop(0.0, '#ff0000');
+            radialGrad.addColorStop(1.0, '#000');
+            ctx.fillStyle = radialGrad;
+            ctx.fillRect(500,500,300,300);
+
+            // 图片的填充
+            var bgImg = new Image();
+            bgImg.src = './flower.jpg';
+            bgImg.onload = function(){
+                  var pattern = ctx.createPattern(bgImg,"repeat")//可以填充图片，也可以是一个canvas,video
+                ctx.fillStyle = pattern;
+                ctx.fillStyle = 'red';
+                ctx.fillRect(0,600,300,300);
+                // 边框填充
+                // ctx.lineWidth = 20;
+                // ctx.strokeStyle = pattern;
+                // ctx.strokeRect(100,600,200,200); 
+            }
+
+        }
+    </script>    
+    </body>
+    </html>

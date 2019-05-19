@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('myCanvas'),
+        ctx = canvas.getContext('2d');
+
+        //简单画线
+
+        // // //设置
+        // ctx.moveTo(100,100);
+        // ctx.lineTo(500,100);
+        // ctx.lineTo(500,300);
+        
+        // ctx.moveTo(200,200);
+        // ctx.lineTo(400,200);
+        // ctx.lineTo(400,400);
+        // ctx.stroke();
+
+        // ctx.lineWidth = 10;
+        // ctx.strokeStyle = "#ff0000";
+        // ctx.lineJoin = "round";
+
+        // //画
+        // ctx.stroke();
+
+
+        //多种颜色
+        ctx.beginPath();
+        ctx.moveTo(100,100);
+        ctx.lineTo(500,100);
+        ctx.lineTo(500,300);
+        ctx.strokeStyle = "#00ff00";
+        ctx.lineWidth = 10;
+        ctx.lineJoin = "round";//mitter尖角  bevel斜接 round圆角的过渡
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(200,200);
+        ctx.lineTo(400,200);
+        ctx.lineTo(400,400);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#0000ff";
+        ctx.closePath();
+        // ctx.stroke();
+
+        // 填充
+        ctx.fillStyle = "yellow";
+        ctx.fill()
+        ctx.stroke();
+
+        // 线段的开始和结束
+        ctx.beginPath();
+        ctx.moveTo(100,600);
+        ctx.lineTo(200,600);
+        ctx.lineWidth = 50;
+        ctx.lineCap = "butt";// butt round square
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(100,700);
+        ctx.lineTo(200,700);
+        ctx.lineWidth = 50;
+        ctx.lineCap = "round";// butt round square
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(100,800);
+        ctx.lineTo(200,800);
+        ctx.lineWidth = 50;
+        ctx.lineCap = "square";// butt round square
+        ctx.stroke();
+        ctx.closePath();
+
+
+        //画矩形
+        ctx.lineWidth = 2;
+        ctx.fillStyle = "green";
+        ctx.fillRect(100,200,100,100);
+        ctx.strokeRect(100,200,100,100);
+        // 叠加
+        ctx.fillStyle = "rgba(255,0,0,0.5)";
+        ctx.fillRect(150,200,100,100);
+        ctx.strokeRect(150,200,100,100);
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+    }
+</script>    
+</body>
+</html>

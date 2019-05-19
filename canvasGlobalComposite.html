@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas图形压盖的几种方式</title>
+</head>
+<body>
+    <div>
+        <a href="#">source-over</a>
+        <a href="#">source-atop</a>    
+        <a href="#">source-in</a>
+        <a href="#">source-out</a>
+        <a href="#">destination-over</a>
+        <a href="#">destination-atop</a>
+        <a href="#">destination-in</a>
+        <a href="#">destination-out</a>
+        <a href="#">lighter</a>
+        <a href="#">copy</a>
+        <a href="#">xor</a>
+    </div>
+    <canvas id="myCanvas" width="1000" height="1000">
+        <p>你的浏览器不支持Canvas</p>
+    </canvas>
+
+<script>
+    window.onload = function(){
+        // 按钮
+    var btns = document.getElementsByTagName("a");
+    for(var i=0;i<btns.length;i++){
+        btns[i].onclick = function(){
+            var that = this;
+            console.log(that.text);
+            draw(this.text);
+            return false;
+        }
+    }
+
+    function draw (setting) {
+        // 实现一个圆角的矩形
+        var canvas = document.getElementById('myCanvas'),
+        ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,1000,1000);
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle="green";
+        ctx.fillRect(150,150,200,200);
+        ctx.restore();
+
+        // 全局的绘制globalCompositeOperation
+        // 默认为source-over 后绘制的图形覆盖在先绘制的图形上
+        //  destination-over x
+        
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(200,200)
+        ctx.lineTo(500,400);
+        ctx.lineTo(200,400);
+        ctx.fillStyle="red";
+        ctx.globalCompositeOperation = setting;
+        ctx.fill();
+        ctx.closePath();
+        ctx.restore();
+
+        ctx.save();
+        ctx.font="bold 24px Arial";
+        ctx.textAlign="left";
+        ctx.fillText('属性globalCompositeOperation：'+setting,00,100);
+
+        ctx.restore();
+
+
+
+       
+        
+    }
+    
+    }
+</script>
+</body>
+</html>
